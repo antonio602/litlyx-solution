@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Litlyx Case Study – Privacy-First, AI-Driven Analytics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Case study of how a SaaS company used Litlyx, a cookie-free, privacy-first analytics platform with a built-in AI data analyst, to improve conversions and decision-making.">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-alt: #111827;
+      --card: #111827;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.1);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2933;
+      --radius-lg: 16px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 45%, #000 100%);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 20px 72px;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .badge-accent {
+      border-color: rgba(56, 189, 248, 0.7);
+      color: var(--accent);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 3vw, 2.7rem);
+      margin: 0;
+      letter-spacing: -0.03em;
+    }
+
+    .subtitle {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .hero-card {
+      margin-top: 20px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 18px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-main {
+      max-width: 560px;
+    }
+
+    .hero-main h2 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .hero-main p {
+      margin: 0;
+      color: var(--text);
+      font-size: 0.97rem;
+    }
+
+    .hero-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .metric-pill {
+      padding: 10px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      font-size: 0.84rem;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .metric-pill strong {
+      color: #e0f2fe;
+    }
+
+    main {
+      margin-top: 40px;
+      display: grid;
+      gap: 24px;
+    }
+
+    .section {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 20px 20px 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    .section h3 {
+      margin: 0 0 12px;
+      font-size: 1.02rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .section p {
+      margin: 0 0 10px;
+      font-size: 0.96rem;
+      color: var(--text);
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .list {
+      padding-left: 1.15rem;
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .list li {
+      margin-bottom: 8px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .tag {
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .steps li {
+      position: relative;
+      padding-left: 40px;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .steps li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 3px;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .metric-card {
+      border-radius: 14px;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.2), rgba(15, 23, 42, 0.95));
+      padding: 10px 12px 11px;
+      font-size: 0.9rem;
+      box-shadow: 0 14px 35px rgba(8, 47, 73, 0.75);
+    }
+
+    .metric-card strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+      color: #e0f2fe;
+    }
+
+    footer {
+      margin-top: 28px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-top: 1px solid rgba(30, 64, 175, 0.6);
+      padding-top: 14px;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 720px) {
+      .hero-card {
+        flex-direction: column;
+      }
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="badge-row">
+        <div class="badge">
+          <span class="dot"></span>
+          Case Study · Litlyx
+        </div>
+        <div class="badge badge-accent">
+          Trusted by the dev community · 1.2K+ ⭐ on GitHub
+        </div>
+      </div>
+
+      <h1>Privacy-First, AI-Driven Analytics for Modern SaaS Teams</h1>
+
+      <p class="subtitle">
+        How a high-growth B2B SaaS company used Litlyx to remove cookie friction, stay GDPR- and CCPA-compliant, and turn raw product data into instant, AI-powered insights that drive growth.
+      </p>
+
+      <div class="hero-card">
+        <div class="hero-main">
+          <h2>Customer Snapshot</h2>
+          <p>
+            A fast-growing SaaS company, anonymized as <strong>“SignalFlow”</strong>, wanted to deeply understand user behavior and conversion performance without relying on intrusive cookie-based tracking or complex analytics setups. Their product and marketing teams needed clear, privacy-safe insights in minutes—not days.
+          </p>
+        </div>
+        <div class="hero-metrics">
+          <div class="metric-pill">
+            <strong>30s</strong> setup, cookie-free tracking
+          </div>
+          <div class="metric-pill">
+            <strong>GDPR &amp; CCPA</strong> compliant by design
+          </div>
+          <div class="metric-pill">
+            <strong>AI</strong> data analyst built-in
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <h3>Overview</h3>
+        <p>
+          SignalFlow’s teams wanted straightforward answers to critical questions such as <em>“Which features drive activation?”</em>, <em>“Where do users drop off?”</em>, and <em>“Which campaigns bring the best customers?”</em> Their legacy analytics stack depended on cookies, manual event tracking, and dashboards that only specialists could interpret. As they expanded into Europe and North America, the cost of maintaining consent banners and compliance overhead kept growing.
+        </p>
+        <p>
+          By adopting <strong>Litlyx</strong>, a cookie-free, privacy-first analytics platform with a built-in AI data analyst, SignalFlow gained actionable, trustworthy insights across product, marketing, and customer journeys—all while preserving a frictionless user experience and strong data protection guarantees.
+        </p>
+      </section>
+
+      <section class="section two-col">
+        <div>
+          <h3>Challenge</h3>
+          <ul class="list">
+            <li><strong>Cookie banners and consent friction</strong> were hurting sign-up conversion rates and damaging the first-time user experience.</li>
+            <li>Their existing analytics stack required <strong>engineering support and manual dashboards</strong> that non-technical stakeholders rarely used.</li>
+            <li>Answering ad-hoc questions like <em>“Why did trial conversions drop last week?”</em> required exports, spreadsheets, or custom SQL.</li>
+            <li>With growth across multiple regions, they needed to remain <strong>fully compliant with GDPR and CCPA</strong> without sacrificing visibility into performance.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Industries Served</h3>
+          <p>
+            While this case study focuses on a SaaS product, the same Litlyx approach now powers analytics across:
+          </p>
+          <div class="tag-row">
+            <span class="tag">Software &amp; Internet</span>
+            <span class="tag">Advertising &amp; Marketing</span>
+            <span class="tag">Media &amp; Entertainment</span>
+            <span class="tag">Retail &amp; Wholesale</span>
+            <span class="tag">Business &amp; Professional Services</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section two-col">
+        <div>
+          <h3>Solution: Litlyx Cookie-Free, AI-Driven Analytics</h3>
+          <p>
+            SignalFlow integrated Litlyx by adding a lightweight script during deployment. Setup took less than 30 seconds after registration, requiring no cookie banners or extra consent prompts. From there, the team could define <strong>custom events and conversion funnels</strong>—for example,
+            <em>“Account created → First project created → First team invite → Upgrade to paid”</em>—in just a few clicks.
+          </p>
+          <p>
+            Using the built-in <strong>AI data analyst</strong>, product and marketing teams asked natural-language questions such as <em>“Which traffic sources bring the highest activation rate?”</em> or <em>“Where do users most often drop off in onboarding?”</em> Litlyx automatically surfaced anomalies, trends, and optimization opportunities in a single AI-driven dashboard.
+          </p>
+          <p>
+            All analytics ran on a <strong>privacy-first architecture</strong>: no cookies, no cross-site tracking, and strict data minimization, with configurations aligned to both GDPR and CCPA requirements.
+          </p>
+        </div>
+        <div>
+          <h3>Implementation Timeline</h3>
+          <ol class="steps">
+            <li><strong>Day 1 – Setup.</strong> Added the Litlyx snippet to the marketing site and in-app pages, enabling automatic tracking for key user actions.</li>
+            <li><strong>Week 1 – Funnel &amp; Event Design.</strong> Defined events for sign-up, onboarding, feature usage, and upgrades, and built funnels for free-to-paid conversion.</li>
+            <li><strong>Week 2 – Insight Loop.</strong> Teams began asking questions directly in Litlyx instead of requesting manual reports. The AI analyst flagged a major onboarding drop-off and identified low-performing channels.</li>
+            <li><strong>Ongoing – Optimization.</strong> Product, growth, and customer success teams iterated on onboarding, landing pages, and experiments, all using the same privacy-safe data foundation.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>Results</h3>
+        <p>
+          Within the first eight weeks of using Litlyx, SignalFlow saw measurable improvements across their funnel and decision-making processes:
+        </p>
+        <div class="metric-grid">
+          <div class="metric-card">
+            <strong>+18% trial-to-paid conversion</strong>
+            After Litlyx revealed a key onboarding bottleneck, the product team simplified the flow, leading to a sustained uplift in upgrades.
+          </div>
+          <div class="metric-card">
+            <strong>25% reduction in sign-up drop-off</strong>
+            By removing cookie-banner friction and switching to cookie-free tracking, more users completed the initial sign-up journey.
+          </div>
+          <div class="metric-card">
+            <strong>50% faster decision-making</strong>
+            Product and marketing teams used the AI data analyst for ad-hoc questions, eliminating most manual reporting requests.
+          </div>
+          <div class="metric-card">
+            <strong>Zero added compliance overhead</strong>
+            With analytics aligned to GDPR and CCPA out of the box, the team avoided additional legal reviews and complex consent flows.
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>Why Litlyx</h3>
+        <p>
+          Litlyx was chosen over traditional analytics tools because it combines:
+        </p>
+        <ul class="list">
+          <li><strong>Cookie-free, privacy-first architecture</strong> that removes consent friction and builds user trust.</li>
+          <li><strong>30-second setup and automatic tracking</strong>, meaning teams don’t have to wait on engineering to get answers.</li>
+          <li><strong>Built-in AI data analyst</strong> that turns raw events into clear, conversational insights any stakeholder can understand.</li>
+          <li>A flexible model that supports <strong>software &amp; internet, advertising &amp; marketing, media &amp; entertainment, retail &amp; wholesale, and business &amp; professional services</strong> without extra implementation complexity.</li>
+        </ul>
+        <p>
+          For organizations that value clarity and control but refuse to sacrifice privacy, Litlyx delivers a modern analytics stack that is simple to deploy, easy to interpret, and trusted by the developer community with over <strong>1.2K GitHub stars</strong>.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>&copy; <!--YEAR--> Litlyx. All rights reserved.</span>
+      <span>Learn more at <a href="https://litlyx.co" target="_blank" rel="noopener">litlyx.co</a></span>
+    </footer>
+  </div>
+</body>
+</html>
